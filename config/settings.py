@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,14 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    'main',
-    'colleague',
-    'project',
-    'portfolio',
-    'article',
-    'todo',
-    'form',
-    'page',
+    'apps.main',
+    'apps.colleague',
+    'apps.project',
+    'apps.portfolio',
+    'apps.article',
+    'apps.todo',
+    'apps.form',
+    'apps.page',
     
     'django_jalali'
 ]
@@ -83,10 +84,21 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'isatisstack',                      
+        'USER': 'lartenbashi',
+        'PASSWORD': '@Mirhosein1379??',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -130,7 +142,7 @@ JALALI_SETTINGS = {
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = "fa_IR"
+LANGUAGE_CODE = "fa-ir"
 
 TIME_ZONE = "UTC"
 
@@ -142,4 +154,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
