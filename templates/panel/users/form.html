@@ -1,0 +1,35 @@
+{% extends 'layout/panel/master.html' %}
+
+
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="grid grid-cols-3 gap-4">
+
+        {% for field in form %}
+        <div class="flex flex-col">
+            <label for="{{field.id_for_label }}">{{field.label}}</label>
+            {{field}}
+            <p class="text-xs text-blue-800">{{ field.help_text }}</p>
+            {% if field.errors %}
+            <p class="text-red-500 text-sm">
+                {{ field.errors.0 }}
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+    {% if form.instance.pk %}
+    <button type="submit" class="btn btn-info mt-4">ویرایش کاربر</button>
+    {% else %}
+    <button type="submit" class="btn btn-info mt-4">ساخت کاربر</button>
+    {% endif %}
+
+
+</form>
+
+{% endblock content %}
